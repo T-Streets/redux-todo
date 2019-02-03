@@ -1,17 +1,9 @@
-export default (state, action) => {
-    console.log(state)
+import { ADD_TASK } from '../actions/types'
+
+export default (state = [], action) => {
     switch(action.type) {
-        case 'ADD_TASK':
-            return {
-                todo: action.text,
-                list: [action.text],
-                id: state.id += 1
-            }
-        case 'SUBMIT_TASK':
-            return {
-                state
-                // list: state.list.concat(action.text)
-            }
+        case ADD_TASK:
+            return [...state, { ...action.todo, completed: false }]
         default:
             return state
     }

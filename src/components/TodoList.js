@@ -1,25 +1,33 @@
-import React from 'react'
-import { addTask, submit } from '../actions'
-import { store } from '../store'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-const TodoList = () => (
-    <div>
-        <form onSubmit={dispatchSubmit}>
-            <input onChange={dispatchOnChangeAction}/>
-            <button>Add Task</button>
-        </form>
-    </div>
-)
+class TodoList extends Component {
+    textInput = React.createRef();
 
-function dispatchOnChangeAction (e) {
-    const newTodo = e.target.value
-    store.dispatch(addTask(newTodo))
+    render() {
+        return (
+            <div>
+                <form onSubmit={(e) => {
+                    const { current } = this.textInput
+                    e.preventDefault()
+
+                    if(current.value !== '') {
+                        // addTask(current.value)
+                        current.value = '';
+                    }
+                }}>
+                    <input type="text" placeholder="Enter a to do" ref={this.textInput}/>
+                    <button>Add Task</button>
+                </form>
+
+                {/* <ul>
+                    {
+                        todos.map(todo => <li key={todo.text}>{ todo.text }</li>)
+                    }
+                </ul> */}
+            </div>
+        )
+    }
 }
 
-function dispatchSubmit (e) {
-    e.preventDefault()
-    const newTodo = store.getState().todo
-    store.dispatch(submit(newTodo))
-}
-
-export default TodoList 
+export default connect(null)(TodoList)

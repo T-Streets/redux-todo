@@ -1,15 +1,13 @@
-function addTask (text) {
+import { ADD_TASK } from './types'
+
+let id = 0;
+
+export const addTask = text => {
     return {
-        type: 'ADD_TASK',
-        text
+        type: ADD_TASK,
+        todo: {
+            text,
+            id: id++
+        }
     }
 }
-
-function submit (text) {
-    return {
-        type: 'SUBMIT_TASK',
-        text
-    }
-}
-
-export { addTask, submit }

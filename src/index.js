@@ -1,15 +1,32 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { store } from './store';
 
+/**
+ * Don't even waste your time trying to understand wtf all this crap does.
+ * Not even necessary when you don't even understand the basics of how Redux
+ * interacts within a React app. Just focus on everything else.
+ */
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import { createLogger } from 'redux-logger'
+import reducer from './reducers'
 
-const render = () =>
-ReactDOM.render(<App />, document.getElementById('root'));
+const logger = createLogger({
+    collapsed: false
+})
 
-render()
-store.subscribe(render)
+const createStoreWithMiddleware = applyMiddleware(logger)(createStore);
+const store = createStoreWithMiddleware(reducer);
+
+render(
+    <Provider store={store}>
+        <App />
+    </Provider>
+    , 
+    document.getElementById('root')
+);
 
 serviceWorker.unregister();
