@@ -18,7 +18,6 @@ function dispatchOnChangeAction (e) {
 
 function dispatchSubmit (e) {
     e.preventDefault()
-    console.log(store.getState())
     const newTodo = store.getState().todo
     store.dispatch(submit(newTodo))
 }
