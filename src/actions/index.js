@@ -12,4 +12,5 @@ const addTask = text => {
     }
 }
 
-export default addTask;
+
+export default addTask 

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import addTask from '../actions/index'
+import { addTask, deleteTask } from '../actions/index'
 import { store } from '../index'
 
 class TodoList extends Component {
     textInput = React.createRef();
-    
+
     render() {
         let { todos } = this.props
         return (
@@ -25,7 +25,12 @@ class TodoList extends Component {
 
                 <ul>
                     {
-                        todos.map(todo => <li key={todo.text}>{ todo.text }</li>)
+                        todos.map(todo => [
+                            <li key={todo.text}>{ todo.text }</li>,
+                            <button onClick ={e => {
+                                store.dispatch(todo.id)
+                            }}>Delete</button>
+                        ])
                     }
                 </ul>
             </div>
