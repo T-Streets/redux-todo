@@ -1,21 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addTask, deleteTask } from '../actions/index'
-import { store } from '../index'
 
 class TodoList extends Component {
     textInput = React.createRef();
 
     render() {
-        let { todos } = this.props
+        let { todos, addTask, deleteTask } = this.props
         return (
-            <div>
+            <div className="todo-list">
                 <form onSubmit={(e) => {
                     const { current } = this.textInput
                     e.preventDefault()
 
                     if(current.value !== '') {
-                        store.dispatch(addTask(current.value))
+                        addTask(current.value)
                         current.value = '';
                     }
                 }}>
@@ -26,10 +25,12 @@ class TodoList extends Component {
                 <ul>
                     {
                         todos.map(todo => [
-                            <li key={todo.text}>{ todo.text }</li>,
-                            <button onClick ={e => {
-                                store.dispatch(todo.id)
-                            }}>Delete</button>
+                            <li key={todo.text} 
+                                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}
+                            >
+                                { todo.text }
+                                <button className="delete" onClick ={() => deleteTask(todo.id)}>X</button>
+                            </li>
                         ])
                     }
                 </ul>
@@ -38,10 +39,14 @@ class TodoList extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        todos: state
-    }
-}
+/**
+ * The second parameter to connect can be an object with your action creators you would
+ * like your component to access via this.props
+ */
 
-export default connect(mapStateToProps)(TodoList)
+ /**
+  * Also, mapStateToProps is just a function that redux uses as a general guideline to make things less confusing for people new to it, anyone that knows redux
+  * knows that you dont need to explicitly define a function called mapStateToProps, so check out what I did
+  * in the first parameter of connect(). Its just a function that does exactly what mapStateToProps does.
+  */
+export default connect(state => ({ todos: state }), { addTask, deleteTask })(TodoList)
