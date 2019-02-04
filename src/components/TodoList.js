@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import addTask from '../actions/index'
+import { store } from '../index'
 
 class TodoList extends Component {
     textInput = React.createRef();
-
+    
     render() {
+        let { todos } = this.props
         return (
             <div>
                 <form onSubmit={(e) => {
@@ -12,7 +15,7 @@ class TodoList extends Component {
                     e.preventDefault()
 
                     if(current.value !== '') {
-                        // addTask(current.value)
+                        store.dispatch(addTask(current.value))
                         current.value = '';
                     }
                 }}>
@@ -20,14 +23,20 @@ class TodoList extends Component {
                     <button>Add Task</button>
                 </form>
 
-                {/* <ul>
+                <ul>
                     {
                         todos.map(todo => <li key={todo.text}>{ todo.text }</li>)
                     }
-                </ul> */}
+                </ul>
             </div>
         )
     }
 }
 
-export default connect(null)(TodoList)
+function mapStateToProps(state) {
+    return {
+        todos: state
+    }
+}
+
+export default connect(mapStateToProps)(TodoList)

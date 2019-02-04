@@ -19,7 +19,7 @@ const logger = createLogger({
 })
 
 const createStoreWithMiddleware = applyMiddleware(logger)(createStore);
-const store = createStoreWithMiddleware(reducer);
+export const store = createStoreWithMiddleware(reducer);
 
 render(
     <Provider store={store}>

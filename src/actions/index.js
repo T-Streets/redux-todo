@@ -2,7 +2,7 @@ import { ADD_TASK } from './types'
 
 let id = 0;
 
-export const addTask = text => {
+const addTask = text => {
     return {
         type: ADD_TASK,
         todo: {
@@ -11,3 +11,5 @@ export const addTask = text => {
         }
     }
 }
+
+export default addTask;
