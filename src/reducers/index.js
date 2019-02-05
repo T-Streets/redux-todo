@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
 import todos from './todoReducer'
-import sticky from './stickyReducer'
+import stickyNotes from './stickyReducer'
 
-export default combineReducers({ todos, sticky })
+export default combineReducers({ todos, stickyNotes })

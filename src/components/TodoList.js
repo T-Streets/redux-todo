@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addTask, deleteTask } from '../actions/index'
+import { getTodos } from '../selectors/todoSelector'
 
 class TodoList extends Component {
     textInput = React.createRef();
@@ -49,4 +50,5 @@ class TodoList extends Component {
   * knows that you dont need to explicitly define a function called mapStateToProps, so check out what I did
   * in the first parameter of connect(). Its just a function that does exactly what mapStateToProps does.
   */
-export default connect(state => ({ todos: state }), { addTask, deleteTask })(TodoList)
+// export default connect(state => ({ todos: state.todos }), { addTask, deleteTask })(TodoList)
+
