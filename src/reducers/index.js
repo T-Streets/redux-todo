@@ -1,12 +1,5 @@
-import { ADD_TASK, DELETE_TASK } from '../actions/types'
+import { combineReducers } from 'redux'
+import todos from './todoReducer'
+import sticky from './stickyReducer'
 
-export default (state = [], action) => {
-    switch(action.type) {
-        case ADD_TASK:
-            return [...state, { ...action.todo }]
-        case DELETE_TASK:
-            return state.filter(todo => todo.id !== action.id)
-        default:
-            return state
-    }
-}
+export default combineReducers({ todos, sticky })
