@@ -8,6 +8,7 @@ class TodoList extends Component {
 
     render() {
         let { todos, addTask, deleteTask } = this.props
+        console.log(todos)
         return (
             <div className="todo-list">
                 <form onSubmit={(e) => {
@@ -51,4 +52,9 @@ class TodoList extends Component {
   * in the first parameter of connect(). Its just a function that does exactly what mapStateToProps does.
   */
 // export default connect(state => ({ todos: state.todos }), { addTask, deleteTask })(TodoList)
+export default connect(state => {
+    return {
+        todos: getTodos(state)
+    }
+},{ addTask, deleteTask } )(TodoList)
 
