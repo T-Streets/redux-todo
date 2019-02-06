@@ -41,17 +41,6 @@ class TodoList extends Component {
     }
 }
 
-/**
- * The second parameter to connect can be an object with your action creators you would
- * like your component to access via this.props
- */
-
- /**
-  * Also, mapStateToProps is just a function that redux uses as a general guideline to make things less confusing for people new to it, anyone that knows redux
-  * knows that you dont need to explicitly define a function called mapStateToProps, so check out what I did
-  * in the first parameter of connect(). Its just a function that does exactly what mapStateToProps does.
-  */
-// export default connect(state => ({ todos: state.todos }), { addTask, deleteTask })(TodoList)
 export default connect(state => {
     return {
         todos: getTodos(state)
