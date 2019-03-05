@@ -1,4 +1,4 @@
-import { ADD_TASK, DELETE_TASK } from './types'
+import { ADD_TASK, DELETE_TASK, TOGGLE_TASK } from './types'
 
 /**
  * Just use the automatic return syntax for your action creators.
@@ -16,5 +16,10 @@ export const addTask = text => ({
 
 export const deleteTask = id => ({
     type: DELETE_TASK,
+    id
+})
+
+export const toggleTask = id => ({
+    type: TOGGLE_TASK,
     id
 })
